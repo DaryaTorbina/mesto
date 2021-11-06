@@ -1,5 +1,4 @@
 .page__container {
-
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -8,13 +7,9 @@
   padding: 40px 0 60px;
 }
 
-
-
-
 @media screen and (max-width: 800px) {
-    .page__container {
-      padding-top:  28px;
-      padding-bottom: 36px;
-    }
+  .page__container {
+    padding-top: 28px;
+    padding-bottom: 36px;
   }
-  
+}
