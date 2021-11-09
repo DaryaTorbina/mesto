@@ -1,9 +1,9 @@
 
 // Находим форму в DOM
-let formElement = document.querySelector('.popup__input');
+let formElement = document.querySelector('.form');
 // Находим поля формы в DOM
-let nameInput = formElement.querySelector('.popup__name');
-let jobInput  = formElement.querySelector('.popup__about');
+let nameInput = formElement.querySelector('.popup__text_type_name');
+let jobInput  = formElement.querySelector('.popup__text_type_about');
 
 
 let editProfile = document.querySelector('.profile__edit-button');

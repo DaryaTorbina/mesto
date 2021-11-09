@@ -4,7 +4,6 @@
   align-items: center;
   border-radius: 10px;
   overflow: hidden;
-  height: 360px;
   flex-direction: column;
   background-color: #fff;
 }

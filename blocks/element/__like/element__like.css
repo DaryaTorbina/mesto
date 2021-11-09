@@ -13,3 +13,8 @@
   cursor: pointer;
   margin-right: 20px;
 }
+
+.element__like:hover {
+  opacity: 0.5;
+  transition: opacity 0.3s linear;
+}
