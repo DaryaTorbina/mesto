@@ -46,9 +46,6 @@
 @import url("../blocks/popup/__text/popup__text.css");
 @import url("../blocks/popup/__text/_type/popup__text_type_about.css");
 @import url("../blocks/popup/__text/_type/popup__text_type_name.css");
-@import url("../blocks/popup/__text/_limit/_about/popup__text_limit_about.css");
-@import url("../blocks/popup/__text/_limit/_buttonSave/popup__text_limit_buttonSave.css");
-@import url("../blocks/popup/__text/_limit/_name/popup__text_limit_name.css");
 @import url("../blocks/popup/__buttonSave/popup__buttonSave.css");
 @import url("../blocks/popup/__buttonClose/popup__buttonClose.css");
 

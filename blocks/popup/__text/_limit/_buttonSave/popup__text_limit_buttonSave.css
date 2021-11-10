@@ -1,9 +1,0 @@
-.popup__text_limit_buttonSave {
-  margin-bottom: 35px;
-}
-
-@media screen and (max-width: 800px) {
-  .popup__text_limit_buttonSave {
-    margin-bottom: 20px;
-  }
-}

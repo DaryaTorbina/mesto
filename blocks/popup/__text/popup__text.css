@@ -12,7 +12,13 @@
 @media screen and (max-width: 800px) {
   .popup__text {
     width: 238px;
-    /*margin-left: 22px;
-    margin-right: 22px;*/
   }
+}
+
+.popup__text:nth-child(1) {
+  margin-bottom: 30px;
+}
+
+.popup__text:nth-child(2) {
+  margin-bottom: 50px;
 }
