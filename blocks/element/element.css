@@ -6,4 +6,5 @@
   overflow: hidden;
   flex-direction: column;
   background-color: #fff;
+  position: relative;
 }

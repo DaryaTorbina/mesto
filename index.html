@@ -12,20 +12,12 @@
   <body class="page">
     <div class="page__container">
       <header class="header section page__header">
-        <img
-          class="header__logo"
-          src="./images/header/logo.svg"
-          alt="логотип Место Россия"/>
+        <img class="header__logo" src="./images/header/logo.svg" alt="логотип Место Россия" />
       </header>
       <main class="content page__content">
-        <section
-          class="profile section content__section section_size-profile_limit">
-         
-            <img
-            class="profile__avatar"
-            src="./images/profile/profile-avatar.jpg"
-            alt="Аватар"/>
-          
+        <section class="profile section content__section section_size-profile_limit">
+          <img class="profile__avatar" src="./images/profile/profile-avatar.jpg" alt="Аватар" />
+
           <div class="profile__info">
             <div class="profile__edit">
               <div class="profile__content-name">
@@ -33,97 +25,74 @@
                 <button type="button" class="profile__edit-button"></button>
               </div>
               <p class="profile__about block">Исследователь океана</p>
-               </div>
+            </div>
           </div>
           <button type="button" class="profile__add-button"></button>
         </section>
-        <section class="elements section content__section">
-          <article class="element">
-            <img
-              class="element__image"
-              src="./images/elements/element__karachevsk.jpg"
-              alt="Фото церкви Карачаевск"/>
-            <div class="element__data">
-              <h2 class="element__name block">Карачаевск</h2>
-              <button class="element__like" type="button"></button>
-            </div>
-          </article>
-          <article class="element">
-            <img
-              class="element__image"
-              src="./images/elements/element__elbrus.jpg"
-              alt="Фото церкви Карачаевск"/>
-            <div class="element__data">
-              <h2 class="element__name block">Эльбрус</h2>
-              <button class="element__like" type="button"></button>
-            </div>
-          </article>
-          <article class="element">
-            <img
-              class="element__image"
-              src="./images/elements/element__donbay.jpg"
-              alt="Фото церкви Карачаевск"/>
-            <div class="element__data">
-              <h2 class="element__name block">Домбай</h2>
-              <button class="element__like" type="button"></button>
-            </div>
-          </article>
-          <article class="element">
-            <img
-              class="element__image"
-              src="./images/elements/element__elbrus.jpg"
-              alt="Фото церкви Карачаевск"/>
-            <div class="element__data">
-              <h2 class="element__name block">Гора Эльбрус</h2>
-              <button class="element__like" type="button"></button>
-            </div>
-          </article>
-          <article class="element">
-            <img
-              class="element__image"
-              src="./images/elements/element__donbay.jpg"
-              alt="Фото церкви Карачаевск"/>
-            <div class="element__data">
-              <h2 class="element__name block">Домбай</h2>
-              <button class="element__like" type="button"></button>
-            </div>
-          </article>
-          <article class="element">
-            <img
-              class="element__image"
-              src="./images/elements/element__karachevsk.jpg"
-              alt="Фото церкви Карачаевск"/>
-            <div class="element__data">
-              <h2 class="element__name block">Карачаево-Черкессия</h2>
-              <button class="element__like" type="button"></button>
-            </div>
-          </article>
-        </section>
+        <section class="elements section content__section"></section>
       </main>
 
       <footer class="footer section page__footer">
         <p class="footer__text">&copy; 2021 Mesto Russia</p>
       </footer>
-      <div class="popup">
+
+
+
+
+
+
+      <div class="popup popup__profile">
         <div class="popup__form">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form name="form-element" class="form">
+          <form name="form-element" class="popup__form">
             <div class="popup__input">
-            <input
-              type="text"
-              name="nameinput"
-              class="popup__text popup__text_type_name"/>
-            <input
-              type="text"
-              name="jobinput"
-              class="popup__text popup__text_type_about"/>
-            <button type="submit" class="popup__buttonSave">Сохранить</button>
-          </div>
+              <input type="text" name="nameinput" class="popup__text popup__text_type_name" placeholder="Имя" />
+              <input type="text" name="jobinput" class="popup__text popup__text_type_about" placeholder="О себе"/>
+              <button type="submit" class="popup__buttonSave">Сохранить</button>
+            </div>
           </form>
           <button type="button" class="popup__buttonClose"></button>
         </div>
       </div>
+
+
+
+      <div class="popup popup__mesto">
+        <div class="popup__form">
+          <h2 class="popup__title">Новое место</h2>
+          <form name="form-element" class="popup__form">
+            <div class="popup__input">
+              <input type="text" name="nameinput" class="popup__text popup__input_type_name-mesto" placeholder="Название" />
+              <input type="link" name="linkinput" class="popup__text popup__input_type_link-mesto" placeholder="ССылка на картинку"/>
+              <button type="submit" class="popup__buttonSave">Сохранить</button>
+            </div>
+          </form>
+          <button type="button" class="popup__buttonClose"></button>
+        </div>
+      </div>
+
+
+      <div class="popup popup_zoom">
+            <div class="popup__container popup__container_zoom">
+          <img class="popup__image" src="#" alt="#" />
+          <h2 class="popup__description"></h2>
+          <button class="popup__buttonClose" type="button" title="Закрыть" aria-label="close"></button>
+        </div>
+      </div>
     </div>
+
+    <!--Шаблон карточки-->
+    <template id="element">
+      <article class="element">
+        <img class="element__image"/>
+        <div class="element__data">
+          <h2 class="element__name"></h2>
+          <button type="button" class="element__like"></button>
+        </div>
+        <button type="button" class="element__delete"></button>
+      </article>
+    </template>
+
     <script src="./script/script.js"></script>
   </body>
 </html>
