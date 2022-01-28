@@ -4,5 +4,5 @@
   object-position: center top;
   margin: 0;
   padding: 0;
-  object-fit: contain;
+  object-fit: cover;
 }
