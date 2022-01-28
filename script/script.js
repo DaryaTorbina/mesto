@@ -29,22 +29,17 @@ const initialCards = [
 const sectionElements = document.querySelector('.elements');
 const cardTemplate = document.querySelector('#element').content;
 
-
 //профиль
 const profileName = document.querySelector('.profile__name')
 const profileAbout = document.querySelector('.profile__about')
 
 //инпуты
-	const inputMestoName = document.querySelector('.popup__input_type_name-mesto');
-	const inputMestoLink = document.querySelector('.popup__input_type_link-mesto');
-
+const inputMestoName = document.querySelector('.popup__input_type_name-mesto');
+const inputMestoLink = document.querySelector('.popup__input_type_link-mesto');
 const inputProfileName = document.querySelector('.popup__text_type_name')
 const inputProfileAbout = document.querySelector('.popup__text_type_about')
 
-
-
 //модалки
-
 const editModalProfile = document.querySelector('.popup__profile');
 const addModalMesto = document.querySelector('.popup__mesto');
 
@@ -54,14 +49,12 @@ const addFormMesto= addModalMesto.querySelector('.popup__form');
 
 
 //popup кнопки
-
 const editProfileButton = document.querySelector('.profile__edit-button');
 const closeProfileButton = editModalProfile.querySelector('.popup__buttonClose');
 
 // кнопки добавления места
 const addMestoButton = document.querySelector('.profile__add-button');
 const closeMestoButton = addModalMesto.querySelector('.popup__buttonClose');
-
 
 //увеличение фото
 const popupZoomImage = document.querySelector('.popup_zoom')
@@ -80,7 +73,6 @@ function createNewCard (newName, newLink) {
 
 	const buttonLike = CardUserElement.querySelector('.element__like');
 	//buttonLike.addEventListener('click', like);
-
 	// function like() {
 	// 	buttonLike.classList.toggle('element__like_active');
 	// }
@@ -88,15 +80,13 @@ function createNewCard (newName, newLink) {
 	//лайк 
 	CardUserElement.querySelector('.element__like').addEventListener('click', evt => {
 		const buttonLike = evt.target;			//инициатор событитя
-		buttonLike.classList.toggle('element__like_active');			//
+		buttonLike.classList.toggle('element__like_active');
 	});
-
 
 	//удаление
 	CardUserElement.querySelector('.element__delete').addEventListener('click', () => {
 	CardUserElement.remove();
 	});
-
 
 	//открытие попапа с картинкой
 	CardElementImage.addEventListener('click', () => {
@@ -104,8 +94,6 @@ function createNewCard (newName, newLink) {
 		popupZoomImageImg.src = newLink;
 		popupZoomImageTitle.textContent = newName;
 	});
-
-
 	return CardUserElement;
 }
 
@@ -113,7 +101,6 @@ function createNewCard (newName, newLink) {
 function toggleModal(modal) {
 	modal.classList.toggle('popup__open')
 }
-
 // //пробуем заемнтить на функцию тоггл 1 2
 // function toggleEditModalProfile() {
 // 	editModalProfile.classList.toggle('popup__open')
@@ -128,33 +115,23 @@ editProfileButton.addEventListener('click',function() {
 	toggleModal(editModalProfile)
 })
 
-
 closeProfileButton.addEventListener('click',function() {
 	toggleModal(editModalProfile)
 })
-
-
 
 addMestoButton.addEventListener('click',function() {
 	toggleModal(addModalMesto)
 })
 
-
 closeMestoButton.addEventListener('click',function() {
 	toggleModal(addModalMesto)
 })
-
-
 
 closeZoomButton.addEventListener('click',function() {
 	toggleModal(popupZoomImage)
 })
 // //или стрелочной описать все 4
 // editProfileButton.addEventListener('click',() => toggleModal(editModalProfile))
-
-
-
-
 
 editFormProfile.addEventListener('submit',(evt) => {
 	evt.preventDefault()
@@ -163,8 +140,17 @@ profileAbout.textContent = inputProfileAbout.value
 toggleModal(editModalProfile)
 })
 
+addFormMesto.addEventListener('submit',(evt) => {
+	evt.preventDefault();
+	sectionElements.prepend(createNewCard(inputMestoName.value, inputMestoLink.value));
 
-//popup__description надо ли????
+	toggleModal(addModalMesto)
+})
+
+//добавление массива элементов при загрузке страницы
+initialCards.forEach(card => {
+	sectionElements.append(createNewCard (card.name, card.link)); //добавляем append
+});
 
 // //1 клик по кнопке открытие попапа профиля
 // editProfileButton.addEventListener('click',() => {
@@ -190,23 +176,3 @@ toggleModal(editModalProfile)
 // 		//console.log ('click', editModalProfile)
 // 		addModalMesto.classList.remove('popup__open')
 // 		})
-		
-
-
-
-
-
-
-
-addFormMesto.addEventListener('submit',(evt) => {
-	evt.preventDefault();
-	sectionElements.prepend(createNewCard(inputMestoName.value, inputMestoLink.value));
-
-	toggleModal(addModalMesto)
-})
-
-
-//добавление массива элементов при загрузке страницы
-initialCards.forEach(card => {
-	sectionElements.append(createNewCard (card.name, card.link)); //добавляем append
-});
