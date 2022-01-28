@@ -34,14 +34,14 @@ const profileName = document.querySelector('.profile__name')
 const profileAbout = document.querySelector('.profile__about')
 
 //инпуты
-const inputMestoName = document.querySelector('.popup__input_type_name-mesto');
-const inputMestoLink = document.querySelector('.popup__input_type_link-mesto');
+const inputMestoName = document.querySelector('.popup_input_type_name-mesto');
+const inputMestoLink = document.querySelector('.popup_input_type_link-mesto');
 const inputProfileName = document.querySelector('.popup__text_type_name')
 const inputProfileAbout = document.querySelector('.popup__text_type_about')
 
 //модалки
-const editModalProfile = document.querySelector('.popup__profile');
-const addModalMesto = document.querySelector('.popup__mesto');
+const editModalProfile = document.querySelector('.popup_profile');
+const addModalMesto = document.querySelector('.popup_mesto');
 
 //форма
 const editFormProfile = editModalProfile.querySelector('.popup__form');
