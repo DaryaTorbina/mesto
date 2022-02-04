@@ -22,9 +22,6 @@
 	top: 95px;
 }
 
-.popup__error_active {
-	visibility: visible;
-}
 
 .popup__buttonSave_inacive {
   background-color: #fff;
