@@ -1,0 +1,36 @@
+.popup__error {
+  color: #ff0000;
+  font-size: 12px;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  top: 33px;
+  visibility: hidden;
+}
+ 
+.popup__error_active {
+	visibility: visible;
+}
+
+.about-input-error{
+	top: 95px;
+}
+
+.url-mesto-input-error {
+	top: 95px;
+}
+
+.popup__error_active {
+	visibility: visible;
+}
+
+.popup__buttonSave_inacive {
+  background-color: #fff;
+  border: 1px solid #c4c4c4;
+  color: #c4c4c4;
+}
+.popup__text_type_error {
+	border-bottom: 1px solid #ff0000;
+}

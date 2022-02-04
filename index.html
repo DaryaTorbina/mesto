@@ -36,27 +36,34 @@
         <p class="footer__text">&copy; 2021 Mesto Russia</p>
       </footer>
 
-      <div class="popup popup_profile">
+       <div class="popup popup_profile">
         <div class="popup__form">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form name="form-element" class="popup__form">
+          <form name="form-element" class="popup__form" novalidate>
             <div class="popup__input">
-              <input type="text" name="nameinput" class="popup__text popup__text_type_name" />
-              <input type="text" name="jobinput" class="popup__text popup__text_type_about" />
+              <input type="text" name="nameinput"id="name-input" class="popup__text popup__text_type_name" required minlength="2" maxlength="40" />
+              <span class="popup__error name-input-error"></span>
+              
+              <input type="text" name="aboutinput" id="about-input"  class="popup__text popup__text_type_about" required minlength="2" maxlength="200"/>
+              <span class="popup__error about-input-error"></span>
+              
               <button type="submit" class="popup__buttonSave">Сохранить</button>
             </div>
           </form>
           <button type="button" class="popup__buttonClose"></button>
         </div>
-      </div>
-
-      <div class="popup popup_mesto">
+      </div> 
+       <div class="popup popup_mesto">
         <div class="popup__form">
           <h2 class="popup__title">Новое место</h2>
-          <form name="form-element" class="popup__form">
+          <form name="form-element" class="popup__form" novalidate>
             <div class="popup__input">
-              <input type="text" name="nameinput" class="popup__text popup__text_type_name-mesto" placeholder="Название" />
-              <input type="link" name="linkinput" class="popup__text popup__text_type_link-mesto" placeholder="Ссылка на картинку"/>
+              <input type="text" name="namemestoinput"  id="name-input"class="popup__text popup__text_type_name-mesto" placeholder="Название"  required minlength="2" maxlength="30"/>
+              <!--  заготовка для id в валидацию сделана на всех формах-->
+              <span class="popup__error name-input-error"></span>
+              <input type="url" name="linkmestoinput"  id="url-mesto-input"  class="popup__text popup__text_type_link-mesto" placeholder="Ссылка на картинку" required/>
+              
+              <span class="popup__error url-mesto-input-error"></span>
               <button type="submit" class="popup__buttonSave">Сохранить</button>
             </div>
           </form>
@@ -86,6 +93,7 @@
     </template>
     <script src="./script/cards.js"></script>
     <script src="./script/script.js"></script>
+    <script src="./script/validate.js"></script>
 
   </body>
 </html>

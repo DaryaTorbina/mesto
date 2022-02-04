@@ -17,8 +17,8 @@ const editModalProfile = document.querySelector('.popup_profile');
 const addModalMesto = document.querySelector('.popup_mesto');
 
 //форма
-const editFormProfile = editModalProfile.querySelector('.popup__form');
-const addFormMesto= addModalMesto.querySelector('.popup__form');
+const editFormProfile = editModalProfile.querySelector('.popup__form1');
+const addFormMesto= addModalMesto.querySelector('.popup__form1');
 
 
 //popup кнопки
@@ -38,11 +38,32 @@ const popupZoomImageTitle = popupZoomImage.querySelector('.popup__description')
 //функции открытия и закрытия попапа
 function openPopup (popup) {
 	popup.classList.add('popup__open'); 
+	document.addEventListener('keydown', popupCloseEsc);
+	document.addEventListener('click', popupCloseOverlay);
 } 
 
 function closePopup (popup) {
 	popup.classList.remove('popup__open'); 
+	document.removeEventListener('keydown', popupCloseEsc);
+	document.removeEventListener('click', popupCloseOverlay);
 } 
+
+//функция закрытия попапа по клику на оверлей
+const popupCloseOverlay = (evt) => {
+	if (evt.target.classList.contains('popup__open')) {
+	  closePopup(evt.target); 
+	};
+  };
+  
+  //функция закрытия попапа по клику на esc
+  const popupCloseEsc = (evt) => {
+	if (evt.key === 'Escape') {
+	  const popupOpened = document.querySelector('.popup__open');
+	  closePopup(popupOpened);
+	};
+  };
+
+
 
 //редактирование профиля
 function editProfile(evt) {
@@ -125,10 +146,34 @@ function createNewCard (newName, newLink) {
 	return cardUserElement;
 }
 
+
 //увеличение фото-карточки закрытие
 closeZoomButton.addEventListener('click',() => {
 	closePopup(popupZoomImage);
 })
+
+
+ 
+
+
+// //функция закрыпия попапа по Esc
+// function closePopupEsc(evt) {
+// 	if (evt.key==='Escape') {
+// 		  const popupOpened = document.querySelector('.popup__open');
+// 		  closePopup(popupOpened);
+// 	  }
+//   }
+
+  
+// //функция закрыпия попапа по нажатию на Overlay
+// function closePopupOverlay(evt) {
+// 	if (evt.target.classList.contains('popup__open')) {
+// 		  const popupOpened = document.querySelector('.popup__open');
+// 		  closePopup(popupOpened);
+// 	  }
+//   }
+
+
 
 //добавление массива элементов при загрузке страницы
 initialCards.forEach(card => {

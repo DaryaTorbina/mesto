@@ -10,6 +10,7 @@
   font-weight: 400;
   cursor: pointer;
   transition: background-color .3s ease-in;
+  margin-top: 45px;
  }
 
 .popup__buttonSave:hover {
