@@ -47,7 +47,7 @@
       </footer>
 
       <div class="popup popup_profile">
-        <div class="popup__form">
+        <div class="popup__form-container">
           <h2 class="popup__title">Редактировать профиль</h2>
 
           <form name="form-element" class="popup__form" novalidate>
@@ -60,35 +60,37 @@
                 required
                 minlength="2"
                 maxlength="40"
+                placeholder="Имя"
               />
               <span class="popup__error name-input-error"></span>
               <input
                 type="text"
-                name="aboutinput"
+                name="about-input"
                 id="about-input"
                 class="popup__text popup__text_type_about"
                 required
                 minlength="2"
                 maxlength="200"
+                placeholder="О себе"
               />
               <span class="popup__error about-input-error"></span>
 
-              <button type="submit" class="popup__buttonSave">Сохранить</button>
+              <button type="submit" class="popup__button-save">Сохранить</button>
             </div>
           </form>
-          <button type="button" class="popup__buttonClose"></button>
+          <button type="button" class="popup__button-close"></button>
         </div>
       </div>
       <div class="popup popup_mesto">
-        <div class="popup__form">
+        <div class="popup__form-container">
           <h2 class="popup__title">Новое место</h2>
           <form name="form-element" class="popup__form" novalidate>
             <div class="popup__input">
               <input
                 type="text"
-                name="namemestoinput"
+                name="name-mesto-input"
                 id="name-mesto-input"
-                class="popup__text popup__text_type_name"
+                class="popup__text popup__text popup__text_type_name-mesto"
                 placeholder="Название"
                 required
                 minlength="2"
@@ -97,17 +99,17 @@
               <span class="popup__error name-mesto-input-error"></span>
               <input
                 type="url"
-                name="linkmestoinput"
+                name="link-mesto-input"
                 id="url-mesto-input"
                 class="popup__text popup__text_type_link-mesto"
                 placeholder="Ссылка на картинку"
                 required
               />
               <span class="popup__error url-mesto-input-error"></span>
-              <button type="submit" class="popup__buttonSave">Сохранить</button>
+              <button type="submit" class="popup__button-save">Сохранить</button>
             </div>
           </form>
-          <button type="button" class="popup__buttonClose"></button>
+          <button type="button" class="popup__button-close"></button>
         </div>
       </div>
 
@@ -116,7 +118,7 @@
           <img class="popup__image" src="#" alt="#" />
           <h2 class="popup__description"></h2>
           <button
-            class="popup__buttonClose"
+            class="popup__button-close"
             type="button"
             title="Закрыть"
             aria-label="close"

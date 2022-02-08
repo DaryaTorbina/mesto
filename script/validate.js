@@ -13,7 +13,7 @@ const hideInputError = (formElement, inputElement, {inputErrorClass, errorClass}
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
-}; 
+ }; 
 
 // Функция проверяющая валидность заполнения поля
 const isValid = (formElement, inputElement, config) => {
@@ -33,18 +33,20 @@ const hasInvalidInput = (inputList) => {
 
 // Функция принимает массив полей ввода
 // и элемент кнопки, состояние которой нужно менять
-const toggleButtonState = (inputList, buttonElement, {inactiveButtonClass}) => {
+const toggleButtonState = (inputList, buttonElement,config) => {
+ // const toggleButtonState = (inputList, buttonElement) => {
     // Если есть хотя бы один невалидный инпут
-  if (hasInvalidInput(inputList)) {
+  if (hasInvalidInput(inputList,config)) {
      // сделай кнопку неактивной
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true);
+    buttonElement.classList.add(config.inactiveButtonClass);
+     buttonElement.disabled = true;
   } else {
     // иначе сделай кнопку активной
-    buttonElement.classList.remove(inactiveButtonClass);
-    buttonElement.removeAttribute('disabled', false);
+    buttonElement.classList.remove(config.inactiveButtonClass);
+    buttonElement.disabled = false;
   }
 };
+
 
 //обработчик для всех полей
 const setEventListeners = (formElement, {inputSelector, submitButtonSelector, ...config}) => {
@@ -80,11 +82,12 @@ const enableValidation = ({formSelector, ...config}) => {
     setEventListeners(formElement, config);
   });
 };
+
 enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__text',
-  submitButtonSelector: '.popup__buttonSave',
-  inactiveButtonClass: 'popup__buttonSave_inacive',
-  inputErrorClass: 'popup__text_type_error',
-  errorClass: 'popup__error_active'
-});
+	formSelector: '.popup__form',
+	inputSelector: '.popup__text',
+	submitButtonSelector: '.popup__button-save',
+	inactiveButtonClass: 'popup__button-save_inacive',
+	inputErrorClass: 'popup__text_type_error',
+	errorClass: 'popup__error_active'
+  });
