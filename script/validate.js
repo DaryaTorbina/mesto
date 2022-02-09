@@ -33,20 +33,39 @@ const hasInvalidInput = (inputList) => {
 
 // Функция принимает массив полей ввода
 // и элемент кнопки, состояние которой нужно менять
-const toggleButtonState = (inputList, buttonElement,config) => {
- // const toggleButtonState = (inputList, buttonElement) => {
-    // Если есть хотя бы один невалидный инпут
-  if (hasInvalidInput(inputList,config)) {
+const toggleButtonState = (inputList, buttonElement) => {
+     // Если есть хотя бы один невалидный инпут
+  if (hasInvalidInput(inputList)) {
      // сделай кнопку неактивной
-    buttonElement.classList.add(config.inactiveButtonClass);
+    buttonElement.classList.add('popup__button-save_inacive');
      buttonElement.disabled = true;
   } else {
     // иначе сделай кнопку активной
-    buttonElement.classList.remove(config.inactiveButtonClass);
+    buttonElement.classList.remove('popup__button-save_inacive');
     buttonElement.disabled = false;
   }
 };
+//окончательно запуталась, и не получается сделать по рекомендации.
+//поскольку сроки сдачи работы прошли,функционал реализован,сдаю так. Буду распутывать себя дальше, а сейчас сдаю так.
+//снять ошибку при закрытии
+//комментарий
+// Эта функция относится к валидации, поэтому ее нужно объявлять  внутри модуля валидации. 
+//А в index.js вызывать, передав ему нужные аргументы. Поиск нужных для вызова функции элементов 
+//(inputList, errorList)  можно оставить в index.js
 
+function clearError(popupActive) {
+	const inputList = Array.from(popupActive.querySelectorAll('.popup__text_type_error'));
+	if (inputList.length!==0) {
+		 const errorList = Array.from(popupActive.querySelectorAll('.popup__error_active'));
+		inputList.forEach((inputElement) => {
+			inputElement.classList.remove('popup__text_type_error');
+		});
+		errorList.forEach((errorElement) => {
+			errorElement.classList.remove('popup__error_active');
+			errorElement.textContent = '';
+		});
+	}
+};
 
 //обработчик для всех полей
 const setEventListeners = (formElement, {inputSelector, submitButtonSelector, ...config}) => {
@@ -82,6 +101,9 @@ const enableValidation = ({formSelector, ...config}) => {
     setEventListeners(formElement, config);
   });
 };
+
+
+
 
 enableValidation({
 	formSelector: '.popup__form',

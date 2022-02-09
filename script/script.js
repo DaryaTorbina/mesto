@@ -13,6 +13,7 @@ const inputProfileName = document.querySelector('.popup__text_type_name')
 const inputProfileAbout = document.querySelector('.popup__text_type_about')
 
 //модалки
+
 const editModalProfile = document.querySelector('.popup_profile');
 const addModalMesto = document.querySelector('.popup_mesto');
 
@@ -29,6 +30,10 @@ const popupZoomImage = document.querySelector('.popup_zoom')
 const closeZoomButton = popupZoomImage.querySelector('.popup__button-close')
 const popupZoomImageImg = popupZoomImage.querySelector('.popup__image')
 const popupZoomImageTitle = popupZoomImage.querySelector('.popup__description')
+
+// новые константы НОВЫЕ пеерменные после ревью
+const inputList = Array.from(document.querySelectorAll('.popup__text')); 
+const buttonElement = addModalMesto.querySelector('.popup__button-save');
 
 //функции открытия и закрытия попапа
 function openPopup (popup) {
@@ -58,47 +63,12 @@ const closePopupOverlay = (evt) => {
 	};
   };
 
-//кнопка при открытии
-  function toggleButton(popupActive) {
-	const inputList = Array.from(popupActive.querySelectorAll('.popup__text'));
-	if (inputList.length!==0) {
-		const buttonElement = popupActive.querySelector('.popup__button-save');
-   
-		if (hasInvalidInput(inputList)) {
-			buttonElement.classList.add('popup__button-save_inacive');
-			buttonElement.disabled = true;
-		} 
-		else {
-			buttonElement.classList.remove('popup__button-save_inacive');
-			buttonElement.disabled = false;
-		}
-	}	
-};
-
-//снимать ошибку при закрытии
-function clearError(popupActive) {
-	const inputList = Array.from(popupActive.querySelectorAll('.popup__text_type_error'));
-	if (inputList.length!==0) {
-		const errorList = Array.from(popupActive.querySelectorAll('.popup__error_active'));
-		inputList.forEach((inputElement) => {
-			inputElement.classList.remove('popup__text_type_error');
-		});
-		errorList.forEach((errorElement) => {
-			errorElement.classList.remove('popup__error_active');
-			errorElement.textContent = '';
-		});
-	}
-};
-
-
 //редактирование профиля
-function editProfile(evt) {
-	evt.preventDefault();
+function editProfile() {
 	profileName.textContent = inputProfileName.value;
 	profileAbout.textContent = inputProfileAbout.value;
+	//formEditModalProfile.reset();
 	closePopup(editModalProfile);
-	clearError(editModalProfile);
-	toggleButton(editModalProfile);
 }
 
 //открытие попапа профиля
@@ -106,16 +76,14 @@ editProfileButton.addEventListener('click', () => {
 	openPopup(editModalProfile);
 	inputProfileName.value = profileName.textContent;
 	inputProfileAbout.value = profileAbout.textContent;
-	});
-
-//клик по кнопке открытие попапа профиля
-editProfileButton.addEventListener('click',() => {
-		openPopup(editModalProfile);
+	clearError(editModalProfile);
+	toggleButtonState(inputList,buttonElement);
 });
 
 //закрытие попапа профиля
 closeProfileButton.addEventListener('click',() => {
-	closePopup(editModalProfile);
+	//formEditModalProfile.reset();
+		closePopup(editModalProfile);
 });
 
 //редактирование профиля
@@ -128,23 +96,25 @@ addMestoButton.addEventListener('click',() => {
 	inputMestoName.value = ''; 
 	inputMestoLink.value = '';
 	clearError(addModalMesto);
-	toggleButton(addModalMesto);
+	toggleButtonState(inputList,buttonElement);
  });
 
 //закрытие
 closeMestoButton.addEventListener('click',() => {
 	closePopup(addModalMesto);
-	
+
+
+	//toggleButtonState(inputList,buttonElement);
 });
 
 //добавление
 function addMestoCard (evt) {
 	evt.preventDefault();
 	sectionElements.prepend(createNewCard(inputMestoName.value, inputMestoLink.value));
-	closePopup(addModalMesto);};
+	closePopup(addModalMesto);
+};
 
 addModalMesto.addEventListener('submit',addMestoCard);
-
 
 //Функция создания карточки элемента в ней- изображение, лайк, корзина удаление.
 //можно лучше в функцию создания карточки передавать её данные как объект/вынести поиск элементов в переменные
