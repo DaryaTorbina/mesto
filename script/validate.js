@@ -46,26 +46,37 @@ const toggleButtonState = (inputList, buttonElement) => {
   }
 };
 //окончательно запуталась, и не получается сделать по рекомендации.
-//поскольку сроки сдачи работы прошли,функционал реализован,сдаю так. Буду распутывать себя дальше, а сейчас сдаю так.
+//поскольку сроки сдачи работы прошли,функционал реализован,сдаю так, с двумя вриантами реализованной функции.
 //снять ошибку при закрытии
 //комментарий
 // Эта функция относится к валидации, поэтому ее нужно объявлять  внутри модуля валидации. 
 //А в index.js вызывать, передав ему нужные аргументы. Поиск нужных для вызова функции элементов 
 //(inputList, errorList)  можно оставить в index.js
+// 1 вариант функции
+// function clearError(popupActive) {
+// 	const inputList = Array.from(popupActive.querySelectorAll('.popup__text_type_error'));
+// 	if (inputList.length!==0) {
+// 		 const errorList = Array.from(popupActive.querySelectorAll('.popup__error_active'));
+// 		inputList.forEach((inputElement) => {
+// 			inputElement.classList.remove('popup__text_type_error');
+// 		});
+// 		errorList.forEach((errorElement) => {
+// 			errorElement.classList.remove('popup__error_active');
+// 			errorElement.textContent = '';
+// 		});
+// 	}
+// };
+//2 вариант функции
+function clearError(element, config) {
+  const formClear = element.querySelector('.popup__form');
+  const inputListForm = element.querySelectorAll('.popup__text_type_error');
+  const inputData = Array.from(inputListForm);
+  inputData.forEach(inputElement => {
+    hideInputError(formClear, inputElement, config);
+    inputElement.textContent = ''; 
+  });
+ }
 
-function clearError(popupActive) {
-	const inputList = Array.from(popupActive.querySelectorAll('.popup__text_type_error'));
-	if (inputList.length!==0) {
-		 const errorList = Array.from(popupActive.querySelectorAll('.popup__error_active'));
-		inputList.forEach((inputElement) => {
-			inputElement.classList.remove('popup__text_type_error');
-		});
-		errorList.forEach((errorElement) => {
-			errorElement.classList.remove('popup__error_active');
-			errorElement.textContent = '';
-		});
-	}
-};
 
 //обработчик для всех полей
 const setEventListeners = (formElement, {inputSelector, submitButtonSelector, ...config}) => {
@@ -103,13 +114,13 @@ const enableValidation = ({formSelector, ...config}) => {
 };
 
 
+enableValidation(config);
 
-
-enableValidation({
-	formSelector: '.popup__form',
-	inputSelector: '.popup__text',
-	submitButtonSelector: '.popup__button-save',
-	inactiveButtonClass: 'popup__button-save_inacive',
-	inputErrorClass: 'popup__text_type_error',
-	errorClass: 'popup__error_active'
-  });
+// enableValidation({
+// 	formSelector: '.popup__form',
+// 	inputSelector: '.popup__text',
+// 	submitButtonSelector: '.popup__button-save',
+// 	inactiveButtonClass: 'popup__button-save_inacive',
+// 	inputErrorClass: 'popup__text_type_error',
+// 	errorClass: 'popup__error_active'
+//   });

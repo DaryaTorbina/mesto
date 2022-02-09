@@ -35,6 +35,17 @@ const popupZoomImageTitle = popupZoomImage.querySelector('.popup__description')
 const inputList = Array.from(document.querySelectorAll('.popup__text')); 
 const buttonElement = addModalMesto.querySelector('.popup__button-save');
 
+const config ={
+	formSelector: '.popup__form',
+	inputSelector: '.popup__text',
+	submitButtonSelector: '.popup__button-save',
+	inactiveButtonClass: 'popup__button-save_inacive',
+	inputErrorClass: 'popup__text_type_error',
+	errorClass: 'popup__error_active'
+  }
+
+
+
 //функции открытия и закрытия попапа
 function openPopup (popup) {
 	popup.classList.add('popup__open'); 
@@ -67,7 +78,6 @@ const closePopupOverlay = (evt) => {
 function editProfile() {
 	profileName.textContent = inputProfileName.value;
 	profileAbout.textContent = inputProfileAbout.value;
-	//formEditModalProfile.reset();
 	closePopup(editModalProfile);
 }
 
@@ -76,14 +86,14 @@ editProfileButton.addEventListener('click', () => {
 	openPopup(editModalProfile);
 	inputProfileName.value = profileName.textContent;
 	inputProfileAbout.value = profileAbout.textContent;
-	clearError(editModalProfile);
+	//clearError(editModalProfile);//для 1 варианта функции
+	clearError(editModalProfile, config);//для 2 варианта функции
 	toggleButtonState(inputList,buttonElement);
 });
 
 //закрытие попапа профиля
 closeProfileButton.addEventListener('click',() => {
-	//formEditModalProfile.reset();
-		closePopup(editModalProfile);
+	closePopup(editModalProfile);
 });
 
 //редактирование профиля
@@ -95,16 +105,14 @@ addMestoButton.addEventListener('click',() => {
 	openPopup(addModalMesto);
 	inputMestoName.value = ''; 
 	inputMestoLink.value = '';
-	clearError(addModalMesto);
+	//clearError(addModalMesto);//для 1 варианта функции
+	clearError(addModalMesto, config);//для 2 варианта функции
 	toggleButtonState(inputList,buttonElement);
  });
 
 //закрытие
 closeMestoButton.addEventListener('click',() => {
 	closePopup(addModalMesto);
-
-
-	//toggleButtonState(inputList,buttonElement);
 });
 
 //добавление
