@@ -33,20 +33,19 @@ const hasInvalidInput = (inputList) => {
 
 // Функция принимает массив полей ввода
 // и элемент кнопки, состояние которой нужно менять
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement,config) => {
      // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
      // сделай кнопку неактивной
-    buttonElement.classList.add('popup__button-save_inacive');
+    buttonElement.classList.add(config.inactiveButtonClass);
      buttonElement.disabled = true;
   } else {
     // иначе сделай кнопку активной
-    buttonElement.classList.remove('popup__button-save_inacive');
+    buttonElement.classList.remove(config.inactiveButtonClass);
     buttonElement.disabled = false;
   }
 };
-//окончательно запуталась, и не получается сделать по рекомендации.
-//поскольку сроки сдачи работы прошли,функционал реализован,сдаю так, с двумя вриантами реализованной функции.
+
 //снять ошибку при закрытии
 //комментарий
 // Эта функция относится к валидации, поэтому ее нужно объявлять  внутри модуля валидации. 
@@ -67,16 +66,15 @@ const toggleButtonState = (inputList, buttonElement) => {
 // 	}
 // };
 //2 вариант функции
-function clearError(element, config) {
-  const formClear = element.querySelector('.popup__form');
-  const inputListForm = element.querySelectorAll('.popup__text_type_error');
-  const inputData = Array.from(inputListForm);
-  inputData.forEach(inputElement => {
-    hideInputError(formClear, inputElement, config);
-    inputElement.textContent = ''; 
-  });
- }
 
+ function clearError(formClear, config) {
+  const inputListForm = Array.from(
+    formClear.querySelectorAll(`.${config.inputErrorClass}`)  
+  );
+  inputListForm.forEach((inputElement) => {
+    hideInputError(formClear, inputElement, config);
+  });
+} 
 
 //обработчик для всех полей
 const setEventListeners = (formElement, {inputSelector, submitButtonSelector, ...config}) => {

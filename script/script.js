@@ -88,7 +88,7 @@ editProfileButton.addEventListener('click', () => {
 	inputProfileAbout.value = profileAbout.textContent;
 	//clearError(editModalProfile);//для 1 варианта функции
 	clearError(editModalProfile, config);//для 2 варианта функции
-	toggleButtonState(inputList,buttonElement);
+	toggleButtonState(inputList,buttonElement,config);
 });
 
 //закрытие попапа профиля
@@ -107,7 +107,7 @@ addMestoButton.addEventListener('click',() => {
 	inputMestoLink.value = '';
 	//clearError(addModalMesto);//для 1 варианта функции
 	clearError(addModalMesto, config);//для 2 варианта функции
-	toggleButtonState(inputList,buttonElement);
+	toggleButtonState(inputList,buttonElement,config);
  });
 
 //закрытие
