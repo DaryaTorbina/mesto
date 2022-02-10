@@ -13,7 +13,6 @@ const inputProfileName = document.querySelector('.popup__text_type_name')
 const inputProfileAbout = document.querySelector('.popup__text_type_about')
 
 //модалки
-
 const editModalProfile = document.querySelector('.popup_profile');
 const addModalMesto = document.querySelector('.popup_mesto');
 
@@ -43,8 +42,6 @@ const config ={
 	inputErrorClass: 'popup__text_type_error',
 	errorClass: 'popup__error_active'
   }
-
-
 
 //функции открытия и закрытия попапа
 function openPopup (popup) {
@@ -86,8 +83,7 @@ editProfileButton.addEventListener('click', () => {
 	openPopup(editModalProfile);
 	inputProfileName.value = profileName.textContent;
 	inputProfileAbout.value = profileAbout.textContent;
-	//clearError(editModalProfile);//для 1 варианта функции
-	clearError(editModalProfile, config);//для 2 варианта функции
+	clearError(editModalProfile, config);
 	toggleButtonState(inputList,buttonElement,config);
 });
 
@@ -105,8 +101,7 @@ addMestoButton.addEventListener('click',() => {
 	openPopup(addModalMesto);
 	inputMestoName.value = ''; 
 	inputMestoLink.value = '';
-	//clearError(addModalMesto);//для 1 варианта функции
-	clearError(addModalMesto, config);//для 2 варианта функции
+	clearError(addModalMesto, config);
 	toggleButtonState(inputList,buttonElement,config);
  });
 
@@ -157,12 +152,10 @@ function createNewCard (newName, newLink) {
 	return cardUserElement;
 }
 
-
 //увеличение фото-карточки закрытие
 closeZoomButton.addEventListener('click',() => {
 	closePopup(popupZoomImage);
 })
-
 
 //добавление массива элементов при загрузке страницы
 initialCards.forEach(card => {

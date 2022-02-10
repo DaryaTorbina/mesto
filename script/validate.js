@@ -47,26 +47,6 @@ const toggleButtonState = (inputList, buttonElement,config) => {
 };
 
 //снять ошибку при закрытии
-//комментарий
-// Эта функция относится к валидации, поэтому ее нужно объявлять  внутри модуля валидации. 
-//А в index.js вызывать, передав ему нужные аргументы. Поиск нужных для вызова функции элементов 
-//(inputList, errorList)  можно оставить в index.js
-// 1 вариант функции
-// function clearError(popupActive) {
-// 	const inputList = Array.from(popupActive.querySelectorAll('.popup__text_type_error'));
-// 	if (inputList.length!==0) {
-// 		 const errorList = Array.from(popupActive.querySelectorAll('.popup__error_active'));
-// 		inputList.forEach((inputElement) => {
-// 			inputElement.classList.remove('popup__text_type_error');
-// 		});
-// 		errorList.forEach((errorElement) => {
-// 			errorElement.classList.remove('popup__error_active');
-// 			errorElement.textContent = '';
-// 		});
-// 	}
-// };
-//2 вариант функции
-
  function clearError(formClear, config) {
   const inputListForm = Array.from(
     formClear.querySelectorAll(`.${config.inputErrorClass}`)  
@@ -111,14 +91,4 @@ const enableValidation = ({formSelector, ...config}) => {
   });
 };
 
-
 enableValidation(config);
-
-// enableValidation({
-// 	formSelector: '.popup__form',
-// 	inputSelector: '.popup__text',
-// 	submitButtonSelector: '.popup__button-save',
-// 	inactiveButtonClass: 'popup__button-save_inacive',
-// 	inputErrorClass: 'popup__text_type_error',
-// 	errorClass: 'popup__error_active'
-//   });
