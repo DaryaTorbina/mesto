@@ -60,7 +60,7 @@ function openPopup (popup) {
 function closePopup (popup) {
 	popup.classList.remove('popup__open'); 
 	document.removeEventListener('keydown', closePopupEsc);
-	document.removeEventListener('click', closePopupOverlay);
+	document.removeEventListener('mousedown', closePopupOverlay);//click
 } 
 
 //функция закрытия попапа по клику на оверлей
