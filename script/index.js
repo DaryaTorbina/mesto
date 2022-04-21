@@ -1,6 +1,9 @@
+import { initialCards } from "./InitialCards.js";
+import {FormValidator} from "./FormValidator.js";
+import { Card } from "./Card.js";
+
 //переменные для создания элемента
 const sectionElements = document.querySelector('.elements');
-const cardTemplate = document.querySelector('#element').content;
 
 //профиль
 const profileName = document.querySelector('.profile__name')
@@ -30,18 +33,22 @@ const closeZoomButton = popupZoomImage.querySelector('.popup__button-close')
 const popupZoomImageImg = popupZoomImage.querySelector('.popup__image')
 const popupZoomImageTitle = popupZoomImage.querySelector('.popup__description')
 
-// новые константы НОВЫЕ пеерменные после ревью
-const inputList = Array.from(document.querySelectorAll('.popup__text')); 
-const buttonElement = addModalMesto.querySelector('.popup__button-save');
-
-const config ={
+const config = {
 	formSelector: '.popup__form',
 	inputSelector: '.popup__text',
 	submitButtonSelector: '.popup__button-save',
 	inactiveButtonClass: 'popup__button-save_inacive',
 	inputErrorClass: 'popup__text_type_error',
 	errorClass: 'popup__error_active'
-  }
+}
+
+// пеерменные для подключения валидации к попапу профиля и места
+const popupValidatorProfile = new FormValidator(config, editModalProfile);
+const  popupValidatorMesto = new FormValidator(config, addModalMesto);
+
+/// показывает ошибки
+popupValidatorProfile.enableValidation();
+popupValidatorMesto.enableValidation();
 
 //функции открытия и закрытия попапа
 function openPopup (popup) {
@@ -71,8 +78,11 @@ const closePopupOverlay = (evt) => {
 	};
   };
 
+//ПРОФИЛЬ
+
 //редактирование профиля
-function editProfile() {
+function editProfile(evt) {
+	evt.preventDefault();
 	profileName.textContent = inputProfileName.value;
 	profileAbout.textContent = inputProfileAbout.value;
 	closePopup(editModalProfile);
@@ -83,8 +93,7 @@ editProfileButton.addEventListener('click', () => {
 	openPopup(editModalProfile);
 	inputProfileName.value = profileName.textContent;
 	inputProfileAbout.value = profileAbout.textContent;
-	clearError(editModalProfile, config);
-	toggleButtonState(inputList,buttonElement,config);
+	popupValidatorProfile.clearError();
 });
 
 //закрытие попапа профиля
@@ -95,69 +104,57 @@ closeProfileButton.addEventListener('click',() => {
 //редактирование профиля
 editModalProfile.addEventListener('submit',editProfile);
 
-//действия с карточками
+//ДЕЙСТВИЯ С КАРТОЧКАМИ
+
+//функция создания карточки
+function createNewCard(data, cardSelector) {
+	const card = new Card(data, cardSelector, openPopupZoomMesto);
+	const cardElement = card.generateCard();
+	return cardElement;
+}
+
+//открытие попапа с картинкой для класса Card
+function openPopupZoomMesto(name, link) {
+	popupZoomImageImg.src = link;
+	popupZoomImageImg.alt = name;
+	popupZoomImageTitle.textContent = name;
+	openPopup(popupZoomImage);
+};
+
+//добавление
+function addMestoCard (evt) {
+	evt.preventDefault();
+	const dataCard =
+	{
+		name: inputMestoName.value,
+		link: inputMestoLink.value
+	}
+	sectionElements.prepend(createNewCard(dataCard, "#element"));
+	closePopup(addModalMesto);
+};
+
+//редактирование карточки
+ addModalMesto.addEventListener('submit',addMestoCard);
+
 //открытие попапа карточки 
 addMestoButton.addEventListener('click',() => {
 	openPopup(addModalMesto);
 	inputMestoName.value = ''; 
 	inputMestoLink.value = '';
-	clearError(addModalMesto, config);
-	toggleButtonState(inputList,buttonElement,config);
+	popupValidatorMesto.clearError();
  });
 
-//закрытие
+//закрытие карточки
 closeMestoButton.addEventListener('click',() => {
 	closePopup(addModalMesto);
 });
-
-//добавление
-function addMestoCard (evt) {
-	evt.preventDefault();
-	sectionElements.prepend(createNewCard(inputMestoName.value, inputMestoLink.value));
-	closePopup(addModalMesto);
-};
-
-addModalMesto.addEventListener('submit',addMestoCard);
-
-//Функция создания карточки элемента в ней- изображение, лайк, корзина удаление.
-//можно лучше в функцию создания карточки передавать её данные как объект/вынести поиск элементов в переменные
-function createNewCard (newName, newLink) {
-	
-	const cardUserElement = cardTemplate.querySelector('.element').cloneNode(true); //получаем клонируем-копируем элемент вместе с содержимым но не добавляем
-	const cardElementImage = cardUserElement.querySelector('.element__image');
-	cardElementImage.src = newLink;  //записали ссылку и на место встало изображение из массива
-	//добавляем в него
-	cardUserElement.querySelector('.element__name').textContent = newName; //записали имя в карточку
-	cardElementImage.alt = newName;  //записали имя в .element__image alt внутри
-	
-	//лайк 
-	cardUserElement.querySelector('.element__like').addEventListener('click', evt => {
-		const buttonLike = evt.target;			//инициатор событитя
-		buttonLike.classList.toggle('element__like_active');
-	});
-
-	//удаление
-	cardUserElement.querySelector('.element__delete').addEventListener('click', () => {
-	cardUserElement.remove();
-	});
-
-	//открытие попапа с картинкой
-	cardElementImage.addEventListener('click', () => {
-		openPopup(popupZoomImage);
-		popupZoomImageImg.src = newLink;
-		popupZoomImageTitle.textContent = newName;
-		popupZoomImageImg.alt = newName;
-
-	});
-	return cardUserElement;
-}
 
 //увеличение фото-карточки закрытие
 closeZoomButton.addEventListener('click',() => {
 	closePopup(popupZoomImage);
 })
 
-//добавление массива элементов при загрузке страницы
-initialCards.forEach(card => {
-	sectionElements.append(createNewCard (card.name, card.link)); //добавляем append
-});
+// добавление массива элементов при загрузке страницы
+initialCards.forEach( item => {
+		sectionElements.append(createNewCard (item, '#element')); //добавляем append
+	});
