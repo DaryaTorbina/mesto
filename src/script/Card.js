@@ -1,9 +1,9 @@
 class Card {
-    constructor( data, cardSelector,openPopupZoomMesto) {
+    constructor( data, cardSelector, {handleCardClick}) {
       this._name = data.name;
       this._link = data.link;
       this._cardSelector = cardSelector;
-      this._openPopupZoomMesto = openPopupZoomMesto; 
+      this._handleCardClick = handleCardClick;
     }
   
  //клонируем
@@ -27,17 +27,18 @@ class Card {
       this._element = null;
     }
     _setEventListeners() {
-      //like
+      //лайк
       this._buttonLike.addEventListener('click', () => {
         this._like();
       });
-      //delete
+      //удаление
       this._buttonDelete.addEventListener('click', () => {
         this._deleteCard();
       });
       //просмотр картинки
       this._elementCardImage.addEventListener('click', () => {
-        this._openPopupZoomMesto(this._name, this._link);
+       this._handleCardClick();
+
       });
     }
     //создание карточки
