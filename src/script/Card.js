@@ -6,15 +6,16 @@ class Card {
       this._handleCardClick = handleCardClick;
     }
   
- //клонируем
+ // находим в dom и клонируем
     _getTemplate() {
-      this._element = document.querySelector(this._cardSelector)
+      const elementCard = document.querySelector(this._cardSelector)
       .content
       .querySelector('.element')
       .cloneNode(true);
   
-      return this._element;
-    }
+      return elementCard;
+   };
+   
   
     //лайк
     _like() {
@@ -41,6 +42,7 @@ class Card {
 
       });
     }
+   
     //создание карточки
     generateCard() {
       this._element = this._getTemplate();
@@ -55,5 +57,6 @@ class Card {
       return this._element;
     }
   }
+ 
   export {Card};
  

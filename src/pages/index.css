@@ -60,3 +60,4 @@
 @import url("../blocks/popup/__error/_active/popup__error_active.css");
 @import url("../blocks/about-input-error/about-input-error.css");
 @import url("../blocks/url-mesto-input-error/url-mesto-input-error.css");
+@import url("../blocks/popup/_zoom/popup_zoom.css");
