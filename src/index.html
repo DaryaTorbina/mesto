@@ -132,13 +132,43 @@
       </div>
     </div>
 
+    <div class="popup popup_confirmation"> <!-- форма pop-up подтверждения удаления фото -->
+ <div class="popup__form-container popup__container_confirmation">       <!-- form-container -->
+        <form name="confirmationDelet" class="popup__form" novalidate>
+          <p class="popup__title popup__title_confirmation">Вы уверены?</p>
+          <button type="submit" class="popup__button-save popup__button-save_confirmation">Да</button>
+          <button type="button" class="popup__button-close" aria-label="close"></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_newavatar"> <!-- форма pop-up обновления аватара -->
+      <div class="popup__form-container">
+        <form name="newAvatar" class="popup__form" novalidate>
+          <h3 class="popup__title">Обновить аватар</h3>
+          <!-- <label class="popup__form-field"> -->
+            <input type="url" name="urlavatar" class="popup__text" id="url-avatarLink-input" required
+                  placeholder="Ссылка на фото" >
+            <span class="popup__text_type_error url-avatarLink-input-error"></span>
+          <!-- </label> -->
+          <button type="submit" class="popup__button-save">Сохранить</button>
+          <button type="reset" class="popup__button-close" aria-label="close"></button>
+        </form>
+      </div>
+    </div>
+
     <!--Шаблон карточки-->
     <template id="element">
       <article class="element">
         <img class="element__image" />
         <div class="element__data">
           <h2 class="element__name"></h2>
-          <button type="button" class="element__like"></button>
+
+          <div class = "element__like-container">
+            <button type="button" class="element__like"></button>
+            <p class ="element__like-count">0</p>
+          </div>
+          
         </div>
         <button type="button" class="element__delete"></button>
       </article>

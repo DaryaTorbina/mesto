@@ -15,7 +15,7 @@ import { config,
 	addModalMesto,
 	editProfileButton,
 	addMestoButton} from '../script/utils/constants.js';
-
+import Api from "../script/Api";
 import PopupWithImage from "../script/PopupWithImage.js";
 import PopupWithForm from "../script/PopupWithForm.js";
 import { UserInfo } from "../script/UserInfo.js";
@@ -28,6 +28,16 @@ const  popupValidatorMesto = new FormValidator(config, addModalMesto);
 /// показывает ошибки
 popupValidatorProfile.enableValidation();
 popupValidatorMesto.enableValidation();
+// запросы к серверу
+const api = new Api({
+	baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
+	headers: {
+	  authorization: 'b998bf4e-efa3-49ce-b447-6c7ee02ac497',
+	  'Content-Type': 'application/json'
+	}
+  }); 
+
+
 
 //ПРОФИЛЬ
 //данные пользователя popup
