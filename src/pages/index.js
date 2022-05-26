@@ -17,15 +17,15 @@ import {
   profileDataAbout,
   profileDataName,
   mestoApiConfig,
-} from "../script/utils/constants.js";
-import Api from "../script/Api.js";
-import Card from "../script/Card.js";
-import FormValidator from "../script/FormValidator.js";
-import Section from "../script/Section.js";
-import PopupWithForm from "../script/PopupWithForm.js";
-import PopupWithImage from "../script/PopupWithImage.js";
-import PopupWithConfirm from "../script/PopupConfirmation.js";
-import UserInfo from "../script/UserInfo.js";
+} from "../components/utils/constants.js";
+import Api from "../components/Api.js";
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithConfirm from "../components/PopupConfirmation.js";
+import UserInfo from "../components/UserInfo.js";
 
 //запросы к серверу
 const api = new Api(mestoApiConfig);
@@ -68,7 +68,7 @@ const cards = new Section(
 
 const addModalMesto = new PopupWithForm(popupElementPhotoSelector, (evt) => {
   evt.preventDefault();
-  addModalMesto.isLoadingMessage(true);
+  addModalMesto.renderLoading(true);
   const formValues = addModalMesto.getFormInputValues();
 
   const item = { name: formValues.name, link: formValues.url };
@@ -83,7 +83,7 @@ const addModalMesto = new PopupWithForm(popupElementPhotoSelector, (evt) => {
       console.error(err);
     })
     .finally(() => {
-      addModalMesto.isLoadingMessage(false);
+      addModalMesto.renderLoading(false);
     });
 });
 addModalMesto.setEventListener();
@@ -107,7 +107,7 @@ function createNewCard(item, cardSelector) {
           .deleteLikeMesto(card.getCardId())
           .then((data) => {
             card.removeLike();
-            card.likesCount(data.likes);
+            card.updateLikes(data.likes);
           })
           .catch((err) => {
             console.error(err);
@@ -117,7 +117,7 @@ function createNewCard(item, cardSelector) {
           .addLikeMesto(card.getCardId())
           .then((data) => {
             card.setLike();
-            card.likesCount(data.likes);
+            card.updateLikes(data.likes);
           })
           .catch((err) => {
             console.error(err);
@@ -146,14 +146,14 @@ function createNewCard(item, cardSelector) {
 }
 
 addMestoButton.addEventListener("click", () => {
-  popupValidatorMesto.clearError();
+  popupValidatorMesto.resetValidation();
   addModalMesto.open();
 });
 
 /////ПРОФИЛЬ
 const popupUser = new PopupWithForm(popupProfileSelector, (evt) => {
   evt.preventDefault();
-  popupUser.isLoadingMessage(true);
+  popupUser.renderLoading(true);
   const formInputValues = popupUser.getFormInputValues();
   api
     .updateUserInfo({
@@ -171,7 +171,7 @@ const popupUser = new PopupWithForm(popupProfileSelector, (evt) => {
       console.error(err);
     })
     .finally(() => {
-      popupUser.isLoadingMessage(false);
+      popupUser.renderLoading(false);
     });
 });
 popupUser.setEventListener();
@@ -186,7 +186,7 @@ editProfileButton.addEventListener("click", () => {
   const userInfoData = userInfo.getUserInfo();
   profileDataAbout.value = userInfoData.userDescription;
   profileDataName.value = userInfoData.userName;
-  popupValidatorProfile.clearError();
+  popupValidatorProfile.resetValidation();
   popupUser.open();
 });
 
@@ -194,7 +194,7 @@ editProfileButton.addEventListener("click", () => {
 //запись в попап
 const popupAvatar = new PopupWithForm(popupUpdateAvatarSelector, (evt) => {
   evt.preventDefault();
-  popupAvatar.isLoadingMessage(true);
+  popupAvatar.renderLoading(true);
   const formInputValues = popupAvatar.getFormInputValues();
   api
     .updateProfileAvatar({ avatar: formInputValues.urlavatar })
@@ -206,7 +206,7 @@ const popupAvatar = new PopupWithForm(popupUpdateAvatarSelector, (evt) => {
       console.error(err);
     })
     .finally(() => {
-      popupAvatar.isLoadingMessage(false);
+      popupAvatar.renderLoading(false);
     });
 });
 popupAvatar.setEventListener();
@@ -218,7 +218,7 @@ const popupAvatarValidator = new FormValidator(
 popupAvatarValidator.enableValidation(); //
 
 profileAvatarEditButton.addEventListener("click", () => {
-  popupAvatarValidator.clearError();
+  popupAvatarValidator.resetValidation();
   popupAvatar.open();
 });
 

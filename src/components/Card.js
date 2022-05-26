@@ -1,3 +1,6 @@
+// ".element__delete" ".element__like");".element__like-count");".element__image");".element__delete").remove();
+//     }".element__name");"element__like_active""element__like_active");
+
 export default class Card {
   constructor({
     data,
@@ -19,7 +22,6 @@ export default class Card {
     this._handleLikeButtonClick = handleLikeButtonClick;
     this._handleRemoveButtonClick = handleRemoveButtonClick;
   }
-
   // находим в dom и клонируем
   _getTemplateElement() {
     return document
@@ -43,29 +45,32 @@ export default class Card {
       this._handleCardClick()
     );
   }
-
-  //создание карточки
+  //переписала .путаница в переменных
   generateCard() {
     this._element = this._getTemplateElement();
     this._buttonLike = this._element.querySelector(".element__like");
-    this._countLike = this._element.querySelector(".element__like-count");
-    this._elementCardImage = this._element.querySelector(".element__image");
+    this._countLikeElement = this._element.querySelector(
+      ".element__like-count"
+    );
+    this._elementCardImage =
+      this._element.querySelector(".element__image");
     if (!this._userMesto) {
       this._element.querySelector(".element__delete").remove();
     }
-    this._elementTitle = this._element.querySelector(".element__name");
-    this._setEventListeners();
+
     this._elementCardImage.src = this._imageLink;
     this._elementCardImage.alt = this._imageName;
-    this._countLike.textContent = this._likes.length;
+    this._element.querySelector(".element__name").textContent = this._name;
+    this._countLikeElement.textContent = this._likes.length;
 
     this._toggleLikeState();
+    this._setEventListeners();
 
     return this._element;
   }
 
   _toggleLikeState() {
-    if (this._checkLike()) {
+    if (this._checkUserLike()) {
       this.setLike();
     } else {
       this.removeLike();
@@ -82,11 +87,11 @@ export default class Card {
     this.isLiked = false;
   }
 
-  likesCount(data) {
-    this._countLike.textContent = data.length;
+  updateLikes(data) {
+    this._countLikeElement.textContent = data.length;
   }
 
-  _checkLike() {
+  _checkUserLike() {
     return this._likes.some((item) => item._id === this._userId);
   }
 

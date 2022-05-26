@@ -43,17 +43,19 @@ export const addMestoButton = profileElement.querySelector(
 export const cardsContainerSelector = ".elements";
 export const cardSelector = "#element";
 
-export const popupZoomContainer = document.querySelector(
-  ".popup__container_zoom"
-);
-export const popupZoomImageImg =
-  popupZoomContainer.querySelector(".popup__image");
-export const popupZoomImageTitle = popupZoomContainer.querySelector(
-  ".popup__description"
-);
+// export const popupZoomContainer = document.querySelector(
+//   ".popup__container_zoom"
+// );
+// export const popupZoomImageImg =
+//   popupZoomContainer.querySelector(".popup__image");
+// export const popupZoomImageTitle = popupZoomContainer.querySelector(
+//   ".popup__description"
+// );
 
 export const mestoApiConfig = {
-  address: "https://mesto.nomoreparties.co/v1",
-  groupId: `cohort-41`,
-  token: `b998bf4e-efa3-49ce-b447-6c7ee02ac497`,
+  address: "https://mesto.nomoreparties.co/v1/cohort-41",
+  headers: {
+    authorization: `b998bf4e-efa3-49ce-b447-6c7ee02ac497`,
+    'Content-Type': 'application/json'
+  }
 };

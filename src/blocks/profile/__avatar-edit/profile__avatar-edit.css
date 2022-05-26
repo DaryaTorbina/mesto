@@ -7,11 +7,11 @@
   border: none;
   border-radius: 50%;
   background: transparent;
-  transition: background-color 0.2s linear;
+  transition: background-color 0.5s linear;
 }
 
 .profile__avatar-edit:hover {
-   background-image: url("../../../images/profile/pen.png");
+   background: rgba(0, 0, 0, .8) url("../../../images/profile/pen.png") center / 26px no-repeat;
    outline: 1px solid black;
    cursor: pointer;
    background-repeat: no-repeat;
