@@ -19,6 +19,7 @@
 
 @import url("../blocks/profile/profile.css");
 @import url("../blocks/profile/__avatar/profile__avatar.css");
+@import url("../blocks/profile/__avatar-edit/profile__avatar-edit.css");
 @import url("../blocks/profile/__name/profile__name.css");
 @import url("../blocks/profile/__about/profile__about.css");
 @import url("../blocks/profile/__edit/profile__edit.css");
@@ -56,7 +57,9 @@
 @import url("../blocks/popup/__button-save/_inactive/popup__button-save_inactive.css");
 @import url("../blocks/popup/__button-close/popup__button-close.css");
 @import url("../blocks/popup/__button-save/_confirmation/popup__button-save_confirmation.css");
+@import url("../blocks/popup/__button-confirmation/popup__button-confirmation.css");
 @import url("../blocks/popup/__title/_confirmation/popup__title_confirmation.css");
+@import url("../blocks/popup/__button-saveconfirm/popup__button-saveconfirm.css");
 
 @import url("../blocks/popup/__image/popup__image.css");
 @import url("../blocks/popup/__container/popup___container.css");
@@ -65,4 +68,5 @@
 @import url("../blocks/popup/__error/_active/popup__error_active.css");
 @import url("../blocks/about-input-error/about-input-error.css");
 @import url("../blocks/url-mesto-input-error/url-mesto-input-error.css");
+@import url("../blocks/avatar-error/avatar-error.css");
 @import url("../blocks/popup/_zoom/popup_zoom.css");

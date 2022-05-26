@@ -2,23 +2,33 @@
 
 //Принимает в конструктор объект с селекторами двух элементов: элемента
 //имени пользователя и элемента информации о себе.
-class UserInfo {
-    constructor({inputProfileName,inputProfileAbout}){
-        this._profileName = document.querySelector(inputProfileName);
-        this._profileAbout = document.querySelector(inputProfileAbout);        
-    }
-    //возвр обект с данными польз.данные подст в форму при открытии
-    getUserInfo(){
-        return{
-            userName:this._profileName.textContent,
-            userAbout:this._profileAbout.textContent
-        }
-    }
+export default class UserInfo {
+  constructor({ inputProfileName, inputProfileAbout, inputProfileAvatar }) {
+    this._inputProfileName = document.querySelector(inputProfileName);
+    this._inputProfileAbout = document.querySelector(inputProfileAbout);
+    this._inputProfileAvatar = document.querySelector(inputProfileAvatar);
+  }
 
-    //приниимает новые данныен пользователя и добавляет их на страницу
-    setUserInfo(userName,userAbout){
-        this._profileName.textContent = userName;
-        this._profileAbout.textContent = userAbout;
-    }
+  getUserInfo() {
+    return {
+      userName: this._inputProfileName.textContent,
+      userDescription: this._inputProfileAbout.textContent,
+    };
+  }
+
+  setUserInfo({ userName, userDescription }) {
+    this._inputProfileName.textContent = userName;
+    this._inputProfileAbout.textContent = userDescription;
+  }
+
+  setUserAvatar({ userAvatarLink }) {
+    this._inputProfileAvatar.src = userAvatarLink;
+  }
+
+  saveUserId(userId) {
+    this._userId = userId;
+  }
+  getUserId() {
+    return this._userId;
+  }
 }
-export {UserInfo};

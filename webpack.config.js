@@ -18,6 +18,7 @@ module.exports = {
     port: 8080,
     open: true
   },
+  devtool:'inline-source-map',
     module: {
     rules: [ // rules — это массив правил
       // добавим в него объект правил для бабеля

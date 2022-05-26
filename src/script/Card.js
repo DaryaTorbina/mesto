@@ -1,62 +1,96 @@
-class Card {
-    constructor( data, cardSelector, {handleCardClick}) {
-      this._name = data.name;
-      this._link = data.link;
-      this._cardSelector = cardSelector;
-      this._handleCardClick = handleCardClick;
-    }
-  
- // находим в dom и клонируем
-    _getTemplate() {
-      const elementCard = document.querySelector(this._cardSelector)
-      .content
-      .querySelector('.element')
+export default class Card {
+  constructor({
+    data,
+    userId,
+    cardSelector,
+    handleCardClick,
+    handleLikeButtonClick,
+    handleRemoveButtonClick,
+  }) {
+    this._userId = userId;
+    this._userMesto = userId === data.owner._id;
+    this._imageLink = data.link;
+    this._imageName = data.name;
+    this._name = data.name;
+    this._likes = data.likes;
+    this._cardId = data._id;
+    this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
+    this._handleLikeButtonClick = handleLikeButtonClick;
+    this._handleRemoveButtonClick = handleRemoveButtonClick;
+  }
+
+  // находим в dom и клонируем
+  _getTemplateElement() {
+    return document
+      .querySelector(this._cardSelector)
+      .content.querySelector(".element")
       .cloneNode(true);
-  
-      return elementCard;
-   };
-   
-  
-    //лайк
-    _like() {
-      this._buttonLike.classList.toggle('element__like_active');
-    }
+  }
 
-    // удаление
-    _deleteCard() {
-      this._element.remove();
-      this._element = null;
+  _setEventListeners() {
+    if (this._userMesto) {
+      this._element
+        .querySelector(".element__delete")
+        .addEventListener("click", (evt) => {
+          this._handleRemoveButtonClick(evt);
+        });
     }
-    _setEventListeners() {
-      //лайк
-      this._buttonLike.addEventListener('click', () => {
-        this._like();
-      });
-      //удаление
-      this._buttonDelete.addEventListener('click', () => {
-        this._deleteCard();
-      });
-      //просмотр картинки
-      this._elementCardImage.addEventListener('click', () => {
-       this._handleCardClick();
+    this._buttonLike.addEventListener("click", (evt) =>
+      this._handleLikeButtonClick(evt)
+    );
+    this._elementCardImage.addEventListener("click", () =>
+      this._handleCardClick()
+    );
+  }
 
-      });
+  //создание карточки
+  generateCard() {
+    this._element = this._getTemplateElement();
+    this._buttonLike = this._element.querySelector(".element__like");
+    this._countLike = this._element.querySelector(".element__like-count");
+    this._elementCardImage = this._element.querySelector(".element__image");
+    if (!this._userMesto) {
+      this._element.querySelector(".element__delete").remove();
     }
-   
-    //создание карточки
-    generateCard() {
-      this._element = this._getTemplate();
-      this._buttonLike = this._element.querySelector('.element__like');
-      this._buttonDelete = this._element.querySelector('.element__delete');
-      this._elementCardImage = this._element.querySelector('.element__image');
-      this._elementTitle = this._element.querySelector('.element__name');
-      this._setEventListeners();
-      this._elementCardImage.src = this._link;
-      this._elementCardImage.alt = this._name;
-      this._elementTitle.textContent = this._name;
-      return this._element;
+    this._elementTitle = this._element.querySelector(".element__name");
+    this._setEventListeners();
+    this._elementCardImage.src = this._imageLink;
+    this._elementCardImage.alt = this._imageName;
+    this._countLike.textContent = this._likes.length;
+
+    this._toggleLikeState();
+
+    return this._element;
+  }
+
+  _toggleLikeState() {
+    if (this._checkLike()) {
+      this.setLike();
+    } else {
+      this.removeLike();
     }
   }
- 
-  export {Card};
- 
+
+  setLike() {
+    this._buttonLike.classList.add("element__like_active");
+    this.isLiked = true;
+  }
+
+  removeLike() {
+    this._buttonLike.classList.remove("element__like_active");
+    this.isLiked = false;
+  }
+
+  likesCount(data) {
+    this._countLike.textContent = data.length;
+  }
+
+  _checkLike() {
+    return this._likes.some((item) => item._id === this._userId);
+  }
+
+  getCardId() {
+    return this._cardId;
+  }
+}

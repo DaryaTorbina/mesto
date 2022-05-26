@@ -6,4 +6,5 @@
   background-position: center;
   align-self: center;
   object-fit: cover;
+  position: relative;
 }
